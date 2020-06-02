@@ -1,0 +1,32 @@
+Explanation of Evaluation Function
+
+We developed an evaluation function to calculate the utility value which will be used by the algorithm to determine what will be the best possible next move.
+
+The algorithm will choose the highest utility value and it will take the next move to the corresponding column.
+
+The evaluation function is
+
+def evaluation_function(self, state):
+        if self.currentTurn == 1:
+            temp_opponent = 2
+        elif self.currentTurn == 2:
+            temp_opponent = 1
+        my_fours = self.checkForStreak(state, self.currentTurn, 4)
+        my_threes = self.checkForStreak(state, self.currentTurn, 3)
+        my_twos = self.checkForStreak(state, self.currentTurn, 2)
+        comp_fours = self.checkForStreak(state, temp_opponent, 4)
+        comp_threes = self.checkForStreak(state, temp_opponent, 3)
+        comp_twos = self.checkForStreak(state, temp_opponent, 2)
+        return (my_fours * 10 + my_threes * 5 + my_twos * 2) - (comp_fours * 10 + comp_threes * 5 + comp_twos * 2)
+
+First, it will check where it can get consecutive fours.
+
+Then it will check where it can get consecutive threes and twos.
+
+Then it will check where the opponent can get consecutive fours.
+
+Then it will check where the opponent can get consecutive threes and twos.
+
+(my_fours * 10 + my_threes * 5 + my_twos * 2) - (comp_fours * 10 + comp_threes * 5 + comp_twos * 2)
+
+Then using the above equation it will determine the best possible utility value to make the next value.
